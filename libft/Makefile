@@ -6,7 +6,7 @@
 #    By: macampos <macampos@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/03 10:58:39 by macampos          #+#    #+#              #
-#    Updated: 2023/11/18 17:07:06 by macampos         ###   ########.fr        #
+#    Updated: 2023/12/05 17:30:06 by macampos         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,6 +29,9 @@ SRC =	ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c ft_isprint.c ft_strlen
 		ft_lstclear.c \
 		ft_lstiter.c \
 		ft_lstmap.c \
+		get_next_line.c \
+		get_next_line_utils.c \
+		
 
 .PHONY: all compile
 

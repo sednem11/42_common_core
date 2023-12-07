@@ -1,22 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   assign_bestfriend.c                                :+:      :+:    :+:   */
+/*   first_free.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: macampos <macampos@student.42.fr>          +#+  +:+       +#+        */
+/*   By: macampos <macampos@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/06 19:10:56 by macampos          #+#    #+#             */
-/*   Updated: 2023/12/06 19:10:58 by macampos         ###   ########.fr       */
+/*   Created: 2023/12/06 19:39:17 by macampos          #+#    #+#             */
+/*   Updated: 2023/12/06 19:40:10 by macampos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_push_swap.h"
+#include "../ft_push_swap.h"
 
-void	assign_bestfriend(t_stack **stack_a, t_stack *stack_b)
+int	first_free(t_stack *first_a, char **str, t_stack **stack_a)
 {
-	while (stack_b != NULL)
+	if (!first_a)
 	{
-		stack_b->bestfriend = find_bestfriend(stack_a, stack_b);
-		stack_b = stack_b->next;
+		free(str);
+		free_stack(stack_a);
+		return (0);
 	}
+	else
+		return (1);
 }

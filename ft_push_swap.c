@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_push_swap.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: macampos <macampos@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: macampos <macampos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 14:57:53 by macampos          #+#    #+#             */
-/*   Updated: 2023/11/27 15:24:25 by macampos         ###   ########.fr       */
+/*   Updated: 2023/12/07 16:26:33 by macampos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_push_swap.h"
 
-int		check_if_sorted(t_stack **stack_a)
+int	check_if_sorted(t_stack **stack_a)
 {
 	t_stack	*current;
 
@@ -26,54 +26,68 @@ int		check_if_sorted(t_stack **stack_a)
 	return (0);
 }
 
-int		check_if_no_doubles(t_stack **stack_a)
+t_stack	*check_create_node(char *str)
 {
-	t_stack *current;
-	t_stack *current2;
+	char	*temp;
+	int		temp1;
 
-	current2 = (*stack_a);
-	current = (*stack_a);
-	while (current->next != NULL)
+	temp1 = ft_atoi(str);
+	temp = ft_itoa(temp1);
+	if (!temp1 && str[0] != '0')
 	{
-		while (current2->next != NULL)
-		{
-			current2 = current2->next;
-			if (current->content == current2->content)
-				return (1);
-		}
-		current = current->next;
-		current2 = current;
+		free(temp);
+		ft_printf("%s\n", "Error");
+		return (NULL);
 	}
-	return (0);
+	if (!ft_strncmp(str, temp, ft_strlen(str)))
+	{
+		free(temp);
+		free(str);
+		return (create_node(temp1));
+	}
+	else
+	{
+		free(temp);
+		ft_printf("%s\n", "Error");
+		return (NULL);
+	}
 }
 
-t_stack	*make_stack(char *argv[], t_stack *stack_a, t_stack *first_a, t_stack *current)
+typedef struct s_stupid
 {
-	int	x;
-	int i;
-	char **str;
+	int		x;
+	int		i;
+	char	**str;
+}			t_stupid;
 
-	i = 1;
-	while (argv[i])
+t_stack	*make_stack(char *argv[], t_stack *stack_a, t_stack *first_a,
+		t_stack *current)
+{
+	struct s_stupid	stupid;
+
+	stupid.i = 1;
+	while (argv[stupid.i])
 	{
-		str = ft_split(argv[i], ' ');
-		x = 0;
-		while (str[x])
+		stupid.str = ft_split(argv[stupid.i], ' ');
+		stupid.x = 0;
+		while (stupid.str[stupid.x])
 		{
-			first_a = create_node(ft_atoi(str[x]));
+			first_a = check_create_node(stupid.str[stupid.x]);
+			if (second_free(first_a, stupid.str, stupid.x) == 0)
+				break ;
 			if (!stack_a)
 				stack_a = first_a;
 			else
 				current->next = first_a;
-			free(str[x]);
 			current = first_a;
-			x++;
-		}		
-		free(str);
-		i++;
+			stupid.x++;
+		}
+		if (first_free(first_a, stupid.str, &stack_a) == 0)
+			break ;
+		free(stupid.str);
+		stupid.i++;
 	}
-	
-	return stack_a;
+	return (stack_a);
 }
 
 int	main(int argc, char **argv)
@@ -81,7 +95,7 @@ int	main(int argc, char **argv)
 	t_stack	*stack_a;
 	t_stack	*stack_b;
 	t_stack	*first_a;
-	t_stack *current;
+	t_stack	*current;
 
 	stack_a = NULL;
 	first_a = NULL;
@@ -90,6 +104,8 @@ int	main(int argc, char **argv)
 	if (argc < 2)
 		return (0);
 	stack_a = make_stack(argv, stack_a, first_a, current);
+	if (!stack_a)
+		return (0);
 	if (check_if_no_doubles(&stack_a) == 1)
 		ft_printf("%s\n", "Error");
 	else

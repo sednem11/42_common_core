@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   move_less_cost.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: macampos <macampos@student.42lisboa.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/12/06 19:11:59 by macampos          #+#    #+#             */
+/*   Updated: 2023/12/06 19:32:24 by macampos         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_push_swap.h"
 
 void	move_down_a(t_stack **stack_a, t_stack *b1)
@@ -29,7 +41,7 @@ void	move_stack_a(t_stack **stack_a, t_stack **stack_b)
 	int		i;
 	int		n;
 	t_stack	*current;
-	
+
 	current = (*stack_a);
 	n = 0;
 	i = 0;

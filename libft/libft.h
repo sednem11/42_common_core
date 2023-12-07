@@ -6,7 +6,7 @@
 /*   By: macampos <macampos@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 10:58:52 by macampos          #+#    #+#             */
-/*   Updated: 2023/11/18 17:01:36 by macampos         ###   ########.fr       */
+/*   Updated: 2023/12/05 17:34:39 by macampos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,14 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <stdarg.h>
+
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 42
+# endif
+
+# include <stdio.h>
+# include <fcntl.h>
+# include <stddef.h>
 
 # define HEX_UPP_BASE "0123456789ABCDEF"
 # define HEX_LOW_BASE "0123456789abcdef"
@@ -61,6 +69,10 @@ void	ft_putnum(int num, long int *counter);
 void	ft_unint(unsigned int num, long int *counter);
 void	ft_puthex(unsigned long int num, long int *counter, int p, int caps);
 void	ft_check(char *str, va_list args, int i, long int *char_ttl);
+int		ft_checknl(char *buffer);
+void	ft_clearbuf(char *buffer);
+char	*ft_strjoin2(char *s1, char *s2);
+char	*get_next_line(int fd);
 
 typedef struct s_list
 {

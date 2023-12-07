@@ -15,6 +15,7 @@
 t_stack	*create_node(int content)
 {
 	t_stack	*new;
+
 	new = malloc(sizeof(t_stack));
 	if (!new)
 		return (NULL);
@@ -26,6 +27,7 @@ t_stack	*create_node(int content)
 void	pusha(t_stack **stack_b, t_stack **stack_a)
 {
 	t_stack	*temp;
+
 	temp = (*stack_b)->next;
 	(*stack_b)->next = *stack_a;
 	*stack_a = *stack_b;
@@ -35,28 +37,30 @@ void	pusha(t_stack **stack_b, t_stack **stack_a)
 
 void	swapa(t_stack **stack_a)
 {
-	t_stack *temp;
+	t_stack	*temp;
 	t_stack	*temp2;
-	temp = *stack_a;// 1
-	temp2 = (*stack_a)->next;// 2
-	*stack_a = (*stack_a)->next;// 2 3 4
-	*stack_a = (*stack_a)->next;// 3 4
+
+	temp = *stack_a;
+	temp2 = (*stack_a)->next;
+	*stack_a = (*stack_a)->next;
+	*stack_a = (*stack_a)->next;
 	temp->next = *stack_a;
-	*stack_a = temp;// 1 3 4
+	*stack_a = temp;
 	temp2->next = *stack_a;
-	*stack_a = temp2;// 2 1 3 4
+	*stack_a = temp2;
 	ft_printf("%s\n", "sa");
 }
 
 void	rotatea(t_stack **stack_a)
 {
 	t_stack	*temp;
-	t_stack *current;
+	t_stack	*current;
+
 	current = (*stack_a);
-	temp = (*stack_a);// 1
-	(*stack_a) = (*stack_a)->next;// 2 3 4
+	temp = (*stack_a);
+	(*stack_a) = (*stack_a)->next;
 	if ((*stack_a)->next == NULL)
-		(*stack_a)->next = temp;// 2 3 4 1
+		(*stack_a)->next = temp;
 	else
 	{
 		while (current->next != NULL)
@@ -71,6 +75,7 @@ void	revrotatea(t_stack **stack_a)
 {
 	t_stack	*temp;
 	t_stack	*current;
+
 	current = (*stack_a);
 	while (current->next->next != NULL)
 	{
@@ -80,6 +85,6 @@ void	revrotatea(t_stack **stack_a)
 	current->next = NULL;
 	temp->next = (*stack_a);
 	*stack_a = temp;
+	current = (*stack_a);
 	ft_printf("%s\n", "rra");
 }
-

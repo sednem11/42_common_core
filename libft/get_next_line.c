@@ -1,27 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   less_cost.c                                        :+:      :+:    :+:   */
+/*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: macampos <macampos@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/06 19:11:48 by macampos          #+#    #+#             */
-/*   Updated: 2023/12/06 19:24:03 by macampos         ###   ########.fr       */
+/*   Created: 2023/10/16 15:39:51 by macampos          #+#    #+#             */
+/*   Updated: 2023/12/05 17:15:35 by macampos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_push_swap.h"
+#include "libft.h"
 
-t_stack	*less_cost(t_stack *stack_b)
+char	*get_next_line(int fd)
 {
-	t_stack	*current;
+	static char	buffer[BUFFER_SIZE + 1];
+	char		*line;
 
-	current = stack_b;
-	while (stack_b != NULL)
+	line = NULL;
+	if (read(fd, 0, 0) < 0 || BUFFER_SIZE < 1)
 	{
-		if (current->cost > stack_b->cost)
-			current = stack_b;
-		stack_b = stack_b->next;
+		ft_clearbuf(buffer);
+		return (NULL);
 	}
-	return (current);
+	while (*buffer != '\0' || read(fd, buffer, BUFFER_SIZE) > 0)
+	{
+		line = ft_strjoin2(line, buffer);
+		if (ft_checknl(buffer))
+			break ;
+	}
+	return (line);
 }

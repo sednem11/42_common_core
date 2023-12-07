@@ -6,7 +6,7 @@
 /*   By: macampos <macampos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/23 19:22:14 by macampos          #+#    #+#             */
-/*   Updated: 2023/10/05 11:04:59 by macampos         ###   ########.fr       */
+/*   Updated: 2023/12/07 15:22:56 by macampos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	ft_atoi(const char *str)
 	result = 0;
 	while (str[i] == 32 || (str[i] >= 9 && str[i] <= 13))
 		i++;
-	if (str[i] == '-' || str[i] == '+')
+	while (str[i] == '-' || str[i] == '+')
 	{
 		if (str[i] == '-')
 			sign *= -1;

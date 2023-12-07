@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_sort.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: macampos <macampos@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/12/06 19:00:04 by macampos          #+#    #+#             */
+/*   Updated: 2023/12/06 19:03:00 by macampos         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_push_swap.h"
 
-int		thisthing(t_stack *current)
+int	thisthing(t_stack *current)
 {
-	int		len;
+	int	len;
 
 	len = 0;
 	while (current != NULL)
@@ -13,9 +25,9 @@ int		thisthing(t_stack *current)
 	return (len);
 }
 
-int		thatthing(t_stack *current)
+int	thatthing(t_stack *current)
 {
-	int		sum;
+	int	sum;
 
 	sum = 0;
 	while (current != NULL)
@@ -32,7 +44,7 @@ void	sort3(t_stack **stack_a)
 		swapa(stack_a);
 	if (((*stack_a)->next)->content > (((*stack_a)->next)->next)->content)
 	{
-		if((((*stack_a)->next)->next)->content > (*stack_a)->content)
+		if ((((*stack_a)->next)->next)->content > (*stack_a)->content)
 		{
 			revrotatea(stack_a);
 			swapa(stack_a);
@@ -44,9 +56,9 @@ void	sort3(t_stack **stack_a)
 
 void	first_push_b(t_stack **stack_a, t_stack **stack_b)
 {
-	int		len;
-	int		sum;
-	int		average;
+	int	len;
+	int	sum;
+	int	average;
 
 	len = thisthing(*stack_a);
 	while (len > 3)
@@ -76,16 +88,15 @@ void	sort(t_stack **stack_a, t_stack **stack_b)
 	else
 	{
 		first_push_b(stack_a, stack_b);
-		sort3(stack_a);	
+		sort3(stack_a);
 		{
 			while ((*stack_b) != NULL)
 			{
-				assign_bestfriend(stack_b, (*stack_b));
 				assign_bestfriend(stack_a, (*stack_b));
 				assign_cost((*stack_a), stack_b);
 				move_less_cost(stack_a, stack_b);
 			}
 		}
 	}
-	last_sort((*stack_a));
+	last_sort(stack_a);
 }
