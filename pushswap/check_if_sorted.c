@@ -1,27 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strncmp.c                                       :+:      :+:    :+:   */
+/*   check_if_sorted.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: macampos <macampos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/02 20:29:45 by macampos          #+#    #+#             */
-/*   Updated: 2023/10/03 23:46:38 by macampos         ###   ########.fr       */
+/*   Created: 2023/12/26 19:33:22 by macampos          #+#    #+#             */
+/*   Updated: 2023/12/26 19:36:17 by macampos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_push_swap.h"
 
-int	ft_strncmp(const char *s1, const char *s2, size_t n)
+int	check_if_sorted(t_stack **stack_a)
 {
-	size_t	i;
+	t_stack	*current;
 
-	i = 0;
-	while ((s1[i] || s2[i]) && i < n)
+	current = (*stack_a);
+	while (current->next != NULL)
 	{
-		if (s1[i] != s2[i])
-			return (((unsigned char *)s1)[i] - ((unsigned char *)s2)[i]);
-		i++;
+		if (current->content > (current->next)->content)
+			return (1);
+		current = current->next;
 	}
 	return (0);
 }

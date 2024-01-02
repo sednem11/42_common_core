@@ -6,7 +6,7 @@
 /*   By: macampos <macampos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/06 19:00:04 by macampos          #+#    #+#             */
-/*   Updated: 2023/12/06 19:03:00 by macampos         ###   ########.fr       */
+/*   Updated: 2023/12/27 13:04:23 by macampos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@ int	thisthing(t_stack *current)
 	return (len);
 }
 
-int	thatthing(t_stack *current)
+double	thatthing(t_stack *current)
 {
-	int	sum;
+	double	sum;
 
 	sum = 0;
 	while (current != NULL)
@@ -56,9 +56,9 @@ void	sort3(t_stack **stack_a)
 
 void	first_push_b(t_stack **stack_a, t_stack **stack_b)
 {
-	int	len;
-	int	sum;
-	int	average;
+	int				len;
+	double			sum;
+	int				average;
 
 	len = thisthing(*stack_a);
 	while (len > 3)
@@ -68,7 +68,9 @@ void	first_push_b(t_stack **stack_a, t_stack **stack_b)
 		if ((*stack_a)->content < average)
 			pushb(stack_a, stack_b);
 		else
+		{
 			rotatea(stack_a);
+		}
 		len = thisthing(*stack_a);
 	}
 }

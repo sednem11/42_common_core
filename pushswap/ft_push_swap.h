@@ -6,7 +6,7 @@
 /*   By: macampos <macampos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 14:57:22 by macampos          #+#    #+#             */
-/*   Updated: 2023/12/07 16:27:38 by macampos         ###   ########.fr       */
+/*   Updated: 2024/01/02 13:06:25 by macampos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,5 +56,13 @@ int					first_free(t_stack *first_a, char **str, t_stack **stack_a);
 int					second_free(t_stack *first_a, char **str, int x);
 int					main(int argc, char **argv);
 int					check_if_no_doubles(t_stack **stack_a);
+void				errorok(t_stack *stack_a);
+int					check_if_sorted(t_stack **stack_a);
+void				rotateall(t_stack **stack_a, t_stack **stack_b);
+void				rotateball(t_stack **stack_b);
+void				rotateaall(t_stack **stack_a);
+void				revrotateall(t_stack **stack_a, t_stack **stack_b);
+void				rotateball(t_stack **stack_b);
+int					move_all(t_stack **stack_a, t_stack **stack_b, int z, t_stack *b1);
 
 #endif

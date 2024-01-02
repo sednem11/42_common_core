@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   move_less_cost.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: macampos <macampos@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: macampos <macampos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/06 19:11:59 by macampos          #+#    #+#             */
-/*   Updated: 2023/12/06 19:32:24 by macampos         ###   ########.fr       */
+/*   Updated: 2024/01/02 15:17:51 by macampos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	move_up(t_stack **stack_b, t_stack *b1)
 	}
 }
 
-void	move_stack_a(t_stack **stack_a, t_stack **stack_b)
+int		move_stack_a(t_stack **stack_a, t_stack **stack_b, int z)
 {
 	int		i;
 	int		n;
@@ -56,13 +56,25 @@ void	move_stack_a(t_stack **stack_a, t_stack **stack_b)
 		current = current->next;
 		n++;
 	}
-	if (n <= i / 2)
+	if (n <= i / 2 && z == 1)
+	{
+		move_all(stack_a, stack_b, 1, less_cost(*stack_b));
+		return (0);
+
+	}
+	else if (n >= i / 2 && z == 2)
+	{
+		move_all(stack_a, stack_b, 2, less_cost(*stack_b));
+		return (0);
+	}
+	if (n <= i / 2 && z == 0)
 	{
 		while ((*stack_a) != find_bestfriend(stack_a, (*stack_b)))
 			rotatea(stack_a);
 	}
-	else
+	else if ((n >= i / 2 && z == 0))
 		move_down_a(stack_a, (*stack_b));
+	return (0);
 }
 
 void	move_less_cost(t_stack **stack_a, t_stack **stack_b)
@@ -86,9 +98,15 @@ void	move_less_cost(t_stack **stack_a, t_stack **stack_b)
 		n++;
 	}
 	if (n <= i / 2)
-		move_up(stack_b, less_cost((*stack_b)));
+	{
+		if (move_stack_a(stack_a, stack_b, 1) == 0)
+			move_up(stack_b, less_cost((*stack_b)));
+	}
 	else
-		move_down(stack_b, less_cost((*stack_b)));
-	move_stack_a(stack_a, stack_b);
+	{
+		if (move_stack_a(stack_a, stack_b, 2) == 0)
+			move_down(stack_b, less_cost((*stack_b)));
+	}
+	move_stack_a(stack_a, stack_b, 0);
 	pusha(stack_b, stack_a);
 }

@@ -6,7 +6,7 @@
 /*   By: macampos <macampos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/06 19:03:16 by macampos          #+#    #+#             */
-/*   Updated: 2023/12/07 18:59:07 by macampos         ###   ########.fr       */
+/*   Updated: 2023/12/26 19:37:05 by macampos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,20 +102,6 @@ t_stack	*make_stack(char *argv[], t_stack *stack_a, t_stack *first_a,
 	return (stack_a);
 }
 
-int	check_if_sorted(t_stack *stack_a)
-{
-	t_stack	*current;
-
-	current = stack_a;
-	while (current->next != NULL)
-	{
-		if (current->content > (current->next)->content)
-			return (1);
-		current = current->next;
-	}
-	return (0);
-}
-
 int	main(int argc, char **argv)
 {
 	struct s_stupid	stupid;
@@ -126,7 +112,8 @@ int	main(int argc, char **argv)
 	stupid.stack_b = NULL;
 	if (argc < 2)
 		return (0);
-	stupid.stack_a = make_stack(argv, stupid.stack_a, stupid.first_a, stupid.current);
+	stupid.stack_a = make_stack(argv, stupid.stack_a,
+			stupid.first_a, stupid.current);
 	if (!stupid.stack_a)
 		return (0);
 	if (check_if_no_doubles(&stupid.stack_a) == 0)
@@ -138,12 +125,7 @@ int	main(int argc, char **argv)
 			free(stupid.line);
 			stupid.line = get_next_line(0);
 		}
-		stupid.z = check_if_sorted(stupid.stack_a);
-		if (stupid.z == 1)
-			ft_printf("%s\n", "Error");
-		else if (stupid.z == 0)
-			ft_printf("%s\n", "OK"); 
-		free_stack(&stupid.stack_a);
+		errorok(stupid.stack_a);
 	}
 	else
 		ft_printf("%s\n", "Error");

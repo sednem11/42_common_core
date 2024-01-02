@@ -6,25 +6,11 @@
 /*   By: macampos <macampos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 14:57:53 by macampos          #+#    #+#             */
-/*   Updated: 2023/12/07 16:26:33 by macampos         ###   ########.fr       */
+/*   Updated: 2024/01/02 15:37:32 by macampos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_push_swap.h"
-
-int	check_if_sorted(t_stack **stack_a)
-{
-	t_stack	*current;
-
-	current = (*stack_a);
-	while (current->next != NULL)
-	{
-		if (current->content > (current->next)->content)
-			return (1);
-		current = current->next;
-	}
-	return (0);
-}
 
 t_stack	*check_create_node(char *str)
 {
@@ -33,13 +19,14 @@ t_stack	*check_create_node(char *str)
 
 	temp1 = ft_atoi(str);
 	temp = ft_itoa(temp1);
-	if (!temp1 && str[0] != '0')
+	if (!temp1 && str[0] != '0' && temp == NULL)
 	{
 		free(temp);
 		ft_printf("%s\n", "Error");
 		return (NULL);
 	}
-	if (!ft_strncmp(str, temp, ft_strlen(str)))
+	if (!ft_strncmp(str, temp, ft_strlen(str)) || 
+		(temp1 == 0 && ft_strlen(str) == 2 && (str[0] == '-' || str[0] == '+')))
 	{
 		free(temp);
 		free(str);
@@ -112,6 +99,12 @@ int	main(int argc, char **argv)
 	{
 		if (check_if_sorted(&stack_a) == 1)
 			sort(&stack_a, &stack_b);
+		current = stack_a;
+		while (current != NULL)
+		{
+			ft_printf("%i\n", current->content);
+			current = current->next;
+		}
 		free_stack(&stack_a);
 	}
 }
