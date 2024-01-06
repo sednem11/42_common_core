@@ -6,7 +6,7 @@
 /*   By: macampos <macampos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/06 19:11:59 by macampos          #+#    #+#             */
-/*   Updated: 2024/01/02 15:17:51 by macampos         ###   ########.fr       */
+/*   Updated: 2024/01/06 17:01:07 by macampos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,78 +35,68 @@ void	move_up(t_stack **stack_b, t_stack *b1)
 		rotateb(stack_b);
 	}
 }
-
-int		move_stack_a(t_stack **stack_a, t_stack **stack_b, int z)
+typedef struct s_struct
 {
 	int		i;
 	int		n;
 	t_stack	*current;
+}			t_stupid;
 
-	current = (*stack_a);
-	n = 0;
-	i = 0;
-	while (current != NULL)
-	{
-		current = current->next;
-		i++;
-	}
-	current = (*stack_a);
-	while (current != find_bestfriend(stack_a, (*stack_b)))
-	{
-		current = current->next;
-		n++;
-	}
-	if (n <= i / 2 && z == 1)
+int	move_stack_a(t_stack **stack_a, t_stack **stack_b, int z)
+{
+	t_stupid	stupid;
+
+	stupid.current = (*stack_a);
+	stupid.i = thisthing(stupid.current);
+	stupid.n = location(stack_a, less_cost(*stack_b));
+	if (stupid.n <= stupid.i / 2 && z == 1)
 	{
 		move_all(stack_a, stack_b, 1, less_cost(*stack_b));
-		return (0);
-
+		return (1);
 	}
-	else if (n >= i / 2 && z == 2)
+	else if (stupid.n > stupid.i / 2 && z == 2)
 	{
 		move_all(stack_a, stack_b, 2, less_cost(*stack_b));
-		return (0);
+		return (1);
 	}
-	if (n <= i / 2 && z == 0)
+	else if (stupid.n <= stupid.i / 2 && z == 0)
 	{
 		while ((*stack_a) != find_bestfriend(stack_a, (*stack_b)))
 			rotatea(stack_a);
+		return (1);
 	}
-	else if ((n >= i / 2 && z == 0))
+	else if ((stupid.n >= stupid.i / 2 && z == 0))
+	{
 		move_down_a(stack_a, (*stack_b));
-	return (0);
+		return (1);
+	}
+	else
+		return (0);
 }
 
 void	move_less_cost(t_stack **stack_a, t_stack **stack_b)
 {
-	t_stack	*current;
-	int		i;
-	int		n;
+	t_stupid	stupid;
 
-	n = 0;
-	i = 0;
-	current = (*stack_b);
-	while (current != NULL)
+	stupid.n = 0;
+	stupid.i = 0;
+	stupid.current = (*stack_b);
+	while (stupid.current != NULL)
 	{
-		current = current->next;
-		i++;
+		stupid.current = stupid.current->next;
+		stupid.i++;
 	}
-	current = (*stack_b);
-	while (current != less_cost((*stack_b)))
+	stupid.current = (*stack_b);
+	while (stupid.current != less_cost((*stack_b)))
 	{
-		current = current->next;
-		n++;
+		stupid.current = stupid.current->next;
+		stupid.n++;
 	}
-	if (n <= i / 2)
+	if (stupid.n < stupid.i / 2)
 	{
 		if (move_stack_a(stack_a, stack_b, 1) == 0)
 			move_up(stack_b, less_cost((*stack_b)));
 	}
-	else
-	{
-		if (move_stack_a(stack_a, stack_b, 2) == 0)
-			move_down(stack_b, less_cost((*stack_b)));
-	}
-	move_stack_a(stack_a, stack_b, 0);
-	pusha(stack_b, stack_a);
+	else if (move_stack_a(stack_a, stack_b, 2) == 0)
+		move_down(stack_b, less_cost((*stack_b)));
 }

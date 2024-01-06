@@ -6,7 +6,7 @@
 /*   By: macampos <macampos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 14:57:22 by macampos          #+#    #+#             */
-/*   Updated: 2024/01/02 13:06:25 by macampos         ###   ########.fr       */
+/*   Updated: 2024/01/06 18:23:12 by macampos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ typedef struct s_stack
 }					t_stack;
 
 t_stack				*create_node(int content);
-void				pusha(t_stack **stack_a, t_stack **stack_b);
+void				pusha(t_stack **stack_b, t_stack **stack_a);
 void				swapa(t_stack **stack_a);
 void				rotatea(t_stack **stack_a);
 void				revrotatea(t_stack **stack_a);
@@ -42,6 +42,8 @@ void				bonuspushb(t_stack **stack_b, t_stack **stack_a);
 void				bonusswapb(t_stack **stack_b);
 void				bonusrotateb(t_stack **stack_b);
 void				bonusrevrotateb(t_stack **stack_b);
+void				rotateallbonus(t_stack **stack_a, t_stack **stack_b);
+void				revrotateallbonus(t_stack **stack_a, t_stack **stack_b);
 void				sort(t_stack **stack_a, t_stack **stack_b);
 t_stack				*find_bestfriend(t_stack **stack_a, t_stack *stack_b1);
 void				assign_bestfriend(t_stack **stack_a, t_stack *stack_b);
@@ -63,6 +65,14 @@ void				rotateball(t_stack **stack_b);
 void				rotateaall(t_stack **stack_a);
 void				revrotateall(t_stack **stack_a, t_stack **stack_b);
 void				rotateball(t_stack **stack_b);
-int					move_all(t_stack **stack_a, t_stack **stack_b, int z, t_stack *b1);
+int					move_all(t_stack **stack_a, t_stack **stack_b, int z,
+						t_stack *b1);
+void				sort2(t_stack **stack_a);
+void				sort3(t_stack **stack_a);
+void				first_push_b(t_stack **stack_a, t_stack **stack_b);
+void				sort5(t_stack **stack_a, t_stack **stack_b);
+int					move_stack_a(t_stack **stack_a, t_stack **stack_b, int z);
+int					location(t_stack **stack_a, t_stack *stack_b);
+int					thisthing(t_stack *current);
 
 #endif

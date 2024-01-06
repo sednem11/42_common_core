@@ -6,7 +6,7 @@
 /*   By: macampos <macampos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/06 19:03:16 by macampos          #+#    #+#             */
-/*   Updated: 2023/12/26 19:37:05 by macampos         ###   ########.fr       */
+/*   Updated: 2024/01/06 18:32:52 by macampos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,11 @@
 
 void	checker_runner(t_stack **stack_a, t_stack **stack_b, char *l)
 {
-	if (l[0] == 's' && l[1] == 'a' && l[2] == '\n')
+	if (l[0] == 'r' && l[1] == 'r' && l[2] == 'r' && l[3] == '\n')
+		revrotateallbonus(stack_a, stack_b);
+	else if (l[0] == 'r' && l[1] == 'r' && l[2] == '\n')
+		rotateallbonus(stack_a, stack_b);
+	else if (l[0] == 's' && l[1] == 'a' && l[2] == '\n')
 		bonusswapa(stack_a);
 	else if (l[0] == 's' && l[1] == 'b' && l[2] == '\n')
 		bonusswapb(stack_b);

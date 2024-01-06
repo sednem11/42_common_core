@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   bestfriend_cost.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: macampos <macampos@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: macampos <macampos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/06 19:11:09 by macampos          #+#    #+#             */
-/*   Updated: 2023/12/06 19:25:47 by macampos         ###   ########.fr       */
+/*   Updated: 2024/01/06 16:44:21 by macampos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,9 @@ int	bestfriend_moves_a(t_stack *stack_a, t_stack *node_b)
 		j++;
 	}
 	if (j < i / 2)
-		return (++j);
+		return (j);
 	else
-		return (++i);
+		return (i - j);
 }
 
 int	bestfriend_moves(t_stack *stack_a, t_stack *stack_b, t_stack *b1)
@@ -63,5 +63,5 @@ int	bestfriend_moves(t_stack *stack_a, t_stack *stack_b, t_stack *b1)
 	if (n <= i / 2)
 		return (n + j);
 	else
-		return ((i - n) + j);
+		return (i - n + j);
 }

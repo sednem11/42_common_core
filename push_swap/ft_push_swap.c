@@ -6,7 +6,7 @@
 /*   By: macampos <macampos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 14:57:53 by macampos          #+#    #+#             */
-/*   Updated: 2024/01/02 15:37:32 by macampos         ###   ########.fr       */
+/*   Updated: 2024/01/04 11:11:29 by macampos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,12 +99,6 @@ int	main(int argc, char **argv)
 	{
 		if (check_if_sorted(&stack_a) == 1)
 			sort(&stack_a, &stack_b);
-		current = stack_a;
-		while (current != NULL)
-		{
-			ft_printf("%i\n", current->content);
-			current = current->next;
-		}
 		free_stack(&stack_a);
 	}
 }

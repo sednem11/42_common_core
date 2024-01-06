@@ -6,7 +6,7 @@
 #    By: macampos <macampos@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/27 16:26:12 by macampos          #+#    #+#              #
-#    Updated: 2024/01/02 15:42:12 by macampos         ###   ########.fr        #
+#    Updated: 2024/01/06 18:23:49 by macampos         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,10 +14,10 @@ NAME = push_swap
 
 BONUS_NAME = checker
 
-SRCS = moves/stack.c moves/stackb.c ft_push_swap.c ft_sort.c bestfriendsort.c bestfriend_cost.c assign_bestfriend.c check_if_no_dobles.c moves/both_stack.c  \
-		assign_cost.c less_cost.c move_less_cost_all.c move_less_cost.c free_stack.c last_sort.c free_folder/first_free.c free_folder/second_free.c check_if_sorted.c  \
+SRCS = moves/stack.c sort_2_3_5.c moves/stackb.c ft_push_swap.c ft_sort.c bestfriendsort.c bestfriend_cost.c assign_bestfriend.c check_if_no_dobles.c moves/both_stack.c  \
+		assign_cost.c less_cost.c move_less_cost_all.c move_less_cost.c free_stack.c last_sort.c free_folder/first_free.c free_folder/second_free.c len_location.c check_if_sorted.c  \
 
-SRC_BONUS = bonus_moves/stack.c bonus_moves/stackb.c moves/both_stack.c checker.c free_folder/first_free.c free_folder/second_free.c free_stack.c check_if_no_dobles.c checker_errorok.c check_if_sorted.c  \
+SRC_BONUS = bonus_moves/stack.c bonus_moves/stackb.c bonus_moves/both_stack_bonus.c moves/both_stack.c checker.c free_folder/first_free.c free_folder/second_free.c free_stack.c check_if_no_dobles.c checker_errorok.c check_if_sorted.c  \
 
 OBJS	= $(SRCS:.c=.o)
 

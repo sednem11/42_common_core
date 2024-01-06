@@ -6,7 +6,7 @@
 /*   By: macampos <macampos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 11:12:08 by macampos          #+#    #+#             */
-/*   Updated: 2024/01/02 15:13:04 by macampos         ###   ########.fr       */
+/*   Updated: 2024/01/06 17:58:25 by macampos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void	revrotateball(t_stack **stack_b)
 	current->next = NULL;
 	temp->next = (*stack_b);
 	*stack_b = temp;
+	current = (*stack_b);
 }
 
 void	revrotateall(t_stack **stack_a, t_stack **stack_b)
@@ -34,17 +35,15 @@ void	revrotateall(t_stack **stack_a, t_stack **stack_b)
 	t_stack	*current;
 
 	current = (*stack_a);
-	temp = (*stack_a);
-	(*stack_a) = (*stack_a)->next;
-	if ((*stack_a)->next == NULL)
-		(*stack_a)->next = temp;
-	else
+	while (current->next->next != NULL)
 	{
-		while (current->next != NULL)
-			current = current->next;
-		current->next = temp;
+		current = current->next;
 	}
-	temp->next = NULL;
+	temp = current->next;
+	current->next = NULL;
+	temp->next = (*stack_a);
+	*stack_a = temp;
+	current = (*stack_a);
 	revrotateball(stack_b);
 	ft_printf("%s\n", "rrr");
 }
@@ -67,6 +66,7 @@ void	rotateaall(t_stack **stack_a)
 	}
 	temp->next = NULL;
 }
+
 void	rotateball(t_stack **stack_b)
 {
 	t_stack	*temp;
