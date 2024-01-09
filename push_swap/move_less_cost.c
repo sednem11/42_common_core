@@ -6,7 +6,7 @@
 /*   By: macampos <macampos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/06 19:11:59 by macampos          #+#    #+#             */
-/*   Updated: 2024/01/06 17:01:07 by macampos         ###   ########.fr       */
+/*   Updated: 2024/01/08 11:54:10 by macampos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,26 +52,23 @@ int	move_stack_a(t_stack **stack_a, t_stack **stack_b, int z)
 	if (stupid.n <= stupid.i / 2 && z == 1)
 	{
 		move_all(stack_a, stack_b, 1, less_cost(*stack_b));
-		return (1);
 	}
 	else if (stupid.n > stupid.i / 2 && z == 2)
 	{
 		move_all(stack_a, stack_b, 2, less_cost(*stack_b));
-		return (1);
 	}
 	else if (stupid.n <= stupid.i / 2 && z == 0)
 	{
 		while ((*stack_a) != find_bestfriend(stack_a, (*stack_b)))
 			rotatea(stack_a);
-		return (1);
 	}
 	else if ((stupid.n >= stupid.i / 2 && z == 0))
 	{
 		move_down_a(stack_a, (*stack_b));
-		return (1);
 	}
 	else
 		return (0);
+	return (1);
 }
 
 void	move_less_cost(t_stack **stack_a, t_stack **stack_b)

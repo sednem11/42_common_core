@@ -6,7 +6,7 @@
 /*   By: macampos <macampos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/06 19:03:16 by macampos          #+#    #+#             */
-/*   Updated: 2024/01/06 18:32:52 by macampos         ###   ########.fr       */
+/*   Updated: 2024/01/06 18:59:45 by macampos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,13 +56,14 @@ t_stack	*check_create_node(char *str)
 
 	temp1 = ft_atoi(str);
 	temp = ft_itoa(temp1);
-	if (!temp1 && str[0] != '0')
+	if (!temp1 && str[0] != '0' && temp == NULL)
 	{
 		free(temp);
 		ft_printf("%s\n", "Error");
 		return (NULL);
 	}
-	if (!ft_strncmp(str, temp, ft_strlen(str)))
+	if (!ft_strncmp(str, temp, ft_strlen(str)) || 
+		(temp1 == 0 && ft_strlen(str) == 2 && (str[0] == '-' || str[0] == '+')))
 	{
 		free(temp);
 		free(str);

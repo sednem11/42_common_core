@@ -6,7 +6,7 @@
 /*   By: macampos <macampos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 12:27:03 by macampos          #+#    #+#             */
-/*   Updated: 2024/01/06 18:04:40 by macampos         ###   ########.fr       */
+/*   Updated: 2024/01/08 11:50:48 by macampos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ void	move_down_all(t_stack **stack_a, t_stack **stack_b, t_stack *b1)
 	{
 		revrotateb(stack_b);
 	}
-	
 }
 
 void	move_up_all(t_stack **stack_a, t_stack **stack_b, t_stack *b1)

@@ -6,7 +6,7 @@
 #    By: macampos <macampos@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/27 16:26:12 by macampos          #+#    #+#              #
-#    Updated: 2024/01/06 18:23:49 by macampos         ###   ########.fr        #
+#    Updated: 2024/01/06 19:20:48 by macampos         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,6 +50,5 @@ fclean:		clean
 		rm -rf $(BONUS_NAME)
 
 re:		fclean 	all
-		fclean	bonus
 
 .PHONY : all clean fclean re
