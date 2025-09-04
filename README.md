@@ -146,7 +146,6 @@ focused on low-level programming, algorithms, system design, and software engine
 
 Each project folder contains:
 - 📁 Source code
-- 📄 README with project-specific info
 - 🛠️ Makefile or build instructions
 
 Clone the repository and explore each project
