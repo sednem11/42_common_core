@@ -1,0 +1,426 @@
+/* General Layout */
+body {
+    background-color: black; /* Tailwind's bg-gray-100 */
+    font-family: sans-serif;
+    height: 100%;
+    margin: 0;
+    overflow: hidden;
+    display: block;
+  }
+  
+  /* Sidebar */
+  aside {
+    width: 16rem; /* w-64 */
+    background-color: #6b21a8; /* Tailwind's bg-purple-700 */
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 1.5rem 1rem; /* py-6 px-4 */
+  }
+  
+  /* Sidebar Title */
+  aside h2 {
+    font-size: 1.5rem; /* text-2xl */
+    font-weight: bold;
+    margin-bottom: 2rem;
+    text-align: center;
+  }
+  
+  /* Sidebar Buttons */
+  aside nav button {
+    width: 100%;
+    text-align: left;
+    padding: 1rem 1.5rem; /* py-4 px-6 */
+    font-size: 1.125rem; /* text-lg */
+    font-weight: 500; /* font-medium */
+    border-radius: 0.375rem;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+  }
+  
+  aside nav button:hover {
+    background-color: #374151; /* hover:bg-gray-700 */
+  }
+  
+  /* Logout Button */
+  aside > button {
+    width: 100%;
+    background-color: #dc2626; /* bg-red-600 */
+    padding: 0.75rem 1.5rem; /* py-3 px-6 */
+    font-size: 1.125rem;
+    font-weight: 600;
+    border-radius: 0.375rem;
+    border: none;
+    cursor: pointer;
+    margin-top: 1rem;
+    transition: background-color 0.2s ease;
+  }
+  
+  aside > button:hover {
+    background-color: #b91c1c; /* hover:bg-red-700 */
+  }
+  
+  /* Main Content Area */
+  main {
+    flex: 1;
+    background-color: black;
+    padding: 0.5rem; /* p-6 */
+    overflow-y: auto;
+  }
+  
+  main h1 {
+    background-color: black;
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+  }
+  
+  /* Hidden views */
+  .view {
+    display: none;
+  }
+  
+  /* Visible view (to be toggled in JS) */
+  .view.active {
+    display: block;
+  }
+
+  /* Chat styles */
+#chatContainer {
+    border-radius: 0.5rem; /* rounded-lg */
+    background-color: grey;
+    display: flex;
+    height: 500px;
+    gap: 200px;
+    font-family: sans-serif;
+  }
+  
+  #roomList {
+    list-style: none;
+    padding: 0;
+    border: 1px solid #ccc;
+    background: #f0f0f0;
+    border-radius: 8px;
+    width: 120px;
+    height: 350px;
+    overflow-y: auto;
+  }
+  
+  #roomList li {
+    padding: 10px;
+    cursor: pointer;
+  }
+  
+  #roomList li:hover {
+    background-color: #d6e4ff;
+  }
+  
+  .invite-button {
+    margin: 10px 0;
+  }
+  
+  #addFriendModal {
+    display: none;
+    margin-top: 10px;
+  }
+  
+  .chat-container {
+    width: 400px;
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 10px;
+    background: white;
+    height: 370px; /* fixed height */
+    overflow-y: auto; /* scroll if content too big */
+  }
+  
+  .messages {
+    height: 300px;
+    overflow-y: auto;
+    border: 1px solid #eee;
+    padding: 10px;
+    margin-bottom: 10px;
+    background: #fafafa;
+    flex-grow: 1;
+  }
+  
+  .message {
+    padding: 5px;
+    margin-bottom: 5px;
+    border-radius: 5px;
+    background-color: #e6f7ff;
+  }
+  
+  .input-container {
+    display: flex;
+  }
+  
+  input[type="text"] {
+    flex: 1;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  #sendBtn {
+    padding: 8px 12px;
+    margin-left: 5px;
+    border: none;
+    background-color: #1890ff;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  #openAddFriend {
+    padding: 8px 12px;
+    margin-left: 5px;
+    border: none;
+    background-color: #1890ff;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  #confirmAddFriend{
+    padding: 8px 12px;
+    margin-left: 5px;
+    border: none;
+    background-color: #1890ff;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  /* Notifications Panel (popover style) */
+  #notificationsPanel {
+    position: absolute;
+    top: 60px;
+    right: 20px;
+    background-color: white;   /* explicitly white */
+    color: black;
+    width: 300px;
+    max-height: 400px;
+    overflow-y: auto;
+    border: 1px solid #ccc;
+    padding: 1rem;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    z-index: 50;
+  }
+
+#notificationsPanel h1 {
+  font-size: 1rem;
+  font-weight: bold;
+  color: black;
+  background-color: white;
+  margin-bottom: 0.5rem;
+}
+
+#notificationList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+#notificationList li {
+  padding: 0.5rem;
+  background-color: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.375rem;
+  margin-bottom: 0.5rem;
+  font-size: 0.875rem;
+}
+
+#notificationList li:last-child {
+  margin-bottom: 0;
+}
+
+/* Matchmaking View */
+#matchmakingView {
+  background-color: #e73939;
+  border: 1px solid #ac1d6c; /* Tailwind's border-gray-200 */
+  border-radius: 0.5rem; /* rounded-lg */
+  padding: 1.5rem; /* p-6 */
+  max-width: 100%;
+  margin: 0 auto;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.05); /* subtle shadow */
+}
+
+/* Matchmaking Status Text */
+#matchStatus {
+  font-size: 1rem;
+  color: #4b5563; /* Tailwind's text-gray-700 */
+  margin-bottom: 1rem;
+}
+
+/* Match Result Message */
+#matchResult {
+  font-size: 1.125rem;
+  font-weight: 600;
+  height:50px;
+  color: black; /* Tailwind's text-green-500 */
+  margin-top: 1rem;
+  padding: 0.75rem 1rem;
+  border: 1px solid #22d3ee; /* Tailwind's cyan-400 */
+  border-radius: 0.375rem; /* Rounded corners */
+  background-color: #f0fdfa; /* Light green-tinted background */
+}
+/* Matchmaking Buttons */
+#startMatchmaking,
+#startMatchmaking2v2,
+#cancelMatchmaking {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 0.375rem;
+  cursor: pointer;
+  border: 1px solid black;
+  transition: background-color 0.2s ease;
+  margin-right: 0.5rem;
+}
+
+#startMatchmaking {
+  background-color: #3b82f6; /* Tailwind's blue-500 */
+  color: white;
+}
+
+#startMatchmaking:hover {
+  background-color: #2563eb; /* blue-600 */
+}
+
+#startMatchmaking2v2 {
+  background-color: rgb(71, 186, 71); /* Tailwind's blue-500 */
+  color: white;
+}
+
+#startMatchmaking2v2:hover {
+  background-color: rgb(71, 186, 71); /* blue-600 */
+}
+
+
+#cancelMatchmaking {
+  background-color: #ef4444; /* Tailwind's red-500 */
+  color: white;
+}
+
+#cancelMatchmaking:hover {
+  background-color: #dc2626; /* red-600 */
+}
+
+/* Game Container (hidden initially) */
+#gameContainer {
+  margin-top: 2rem;
+  background-color: black;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  height: 100%;
+}
+
+#pongGameWrapper {
+  width: 600px;
+  height: 600px;
+  border: 2px solid white; /* Adjust thickness and color */
+  border-radius: 0.5rem; 
+}
+
+#friendMatch
+{
+  color: black;
+}
+
+#profileLayout {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding: 2rem;
+  border: 2px solid white;
+  background-color: rgb(152, 44, 44);
+  border-radius: 8px;
+  margin-top: 1rem;
+}
+
+.stats-section,
+.history-section {
+  display: flex;
+  gap: 0.5rem;
+  flex: 1;
+}
+
+#profileheader {
+  background-color: #2c2c2c;
+  color: white;
+  gap: 1rem;
+  padding: 1.5rem;
+  font-size: 1.5rem;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.box-title {
+  background-color: #2c2c2c;
+  color: white;
+  text-align: center;
+  font-weight: bold;
+  padding: 0.5rem;
+  border-radius: 6px 6px 0 0;
+  margin: -1rem -1rem 1rem -1rem;
+}
+
+#friendlist,
+#winloss,
+#matchhistory1v1,
+#matchhistory2v2 {
+  background-color: #2c2c2c;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 1rem;
+  flex: 1;
+  min-height: 250px;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+#friendlist ul,
+#winloss ul,
+#matchhistory1v1 ul,
+#matchhistory2v2 ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+#friendlist li,
+#winloss li,
+#matchhistory1v1 li,
+#matchhistory2v2 li {
+  padding: 0.5rem 0;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+#friendlist li:last-child,
+#winloss li:last-child,
+#matchhistory1v1 li:last-child,
+#matchhistory2v2 li:last-child {
+  border-bottom: none;
+}
+
+@media (max-width: 767px) {
+  .stats-section,
+  .history-section {
+    flex-direction: column;
+  }
+
+  #friendlist,
+  #winloss,
+  #matchhistory1v1,
+  #matchhistory2v2 {
+    min-height: 200px;
+    max-height: none;
+  }
+}

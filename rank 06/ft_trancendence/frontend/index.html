@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Main Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="dist/logout.js"></script>
+    <link href="styles.css" rel="stylesheet" />
+  </head>
+  <body class="bg-gray-100 font-sans h-screen flex">
+
+    <!-- Sidebar -->
+    <aside class="w-64 text-white flex flex-col justify-between py-6 px-4">
+        <div>
+            <h2 class="text-2xl font-bold mb-8 text-center">🏓 Dashboard</h2>
+            <nav class="space-y-4">
+                    <button data-view="profile" class="nav-btn w-full text-left px-6 py-4 text-lg font-medium rounded hover:bg-gray-700">👤 Profile</button>
+                    <button data-view="matchmaking" class="nav-btn w-full text-left px-6 py-4 text-lg font-medium rounded hover:bg-gray-700">⚔️ Matchmaking</button>
+                    <button data-view="chat" class="nav-btn w-full text-left px-6 py-4 text-lg font-medium rounded hover:bg-gray-700">💬 Chat</button>
+            </nav>
+        </div>
+        <button id="logoutBtn">
+            Logout
+        </button>
+    </aside>
+    <div class="absolute top-4 right-4">
+      <button id="toggleNotifications" class="text-2xl">🔔</button>
+    </div>
+    <!-- Main Content -->
+    <main>
+      <div id="matchmaking">
+        <h1 class="text-2xl font-bold mb-1"></h1>
+        <!-- You can embed your Pong canvas directly here later -->
+      </div>
+
+      <div id="profile" class="hidden">
+        <h1 class="text-2xl font-bold mb-1"></h1>
+        <div id="profileLayout">
+          <p>Welcome, user! This is your profile page.</p>
+
+        </div>
+      </div>
+
+      <div id="chat" class="hidden">
+        <h1 class="text-2xl font-bold mb-1"></h1>
+        <div id="chatContainer" class="hidden">
+          <!-- Chat UI from chat.ts will mount here -->
+        </div>
+      </div>
+      <div id="notificationsPanel" class="view hidden">
+        <h1 class="text-2xl font-bold mb-1">🔔 Notifications</h1>
+        <div id="notificationTab">
+          <ul id="notificationList" class="space-y-2"></ul>
+        </div>
+      </div>
+    </main>
+
+    <script type="module" src="dist/main.js"></script>
+  </body>
+</html>

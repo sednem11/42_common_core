@@ -1,0 +1,2 @@
+{"statusCode":500,"error":"Internal Server Error","message":"Cannot destructure property 'username' of 'req.body' as it is undefined."}--_curl_--"username":"novo_usuario"
+--_curl_--"password":"nova_senha"

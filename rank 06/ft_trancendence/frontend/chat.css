@@ -1,0 +1,130 @@
+
+body {
+  overflow-x: hidden;
+  font-family: Arial, sans-serif;
+  background-color: #181818;
+  color: #f1f1f1;
+  margin: 0;
+  padding: 0;
+  display: block;
+  height: 100vh;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+#roomList {
+  width: 200px;
+  background-color: #2c2c2c;
+  border-right: 1px solid #444;
+  overflow-y: auto;
+}
+
+#roomList li {
+  padding: 10px;
+  cursor: pointer;
+  border-bottom: 1px solid #444;
+}
+
+#roomList li:hover {
+  background-color: #3a3a3a;
+}
+
+#roomList li.active {
+  background-color: #007bff;
+  color: white;
+}
+
+.chat-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  max-width: 100%;
+  overflow-x: hidden;
+  overflow-y: hidden;
+}
+
+.messages {
+  background-color: #1e1e1e;
+  color: #f1f1f1;
+  padding: 10px;
+  border-radius: 5px;
+  overflow-y: auto;
+  flex: 1;
+}
+
+.message {
+  color: #e0e0e0;
+  background-color: #2a2a2a;
+  padding: 5px 10px;
+  margin-bottom: 5px;
+  border-radius: 4px;
+}
+
+
+.input-container {
+  display: flex;
+  color :#2a2a2a;
+}
+
+#messageInput {
+  flex: 1;	
+  padding: 10px;
+  border: none;
+  border-radius: 5px 0 0 5px;
+  outline: none;
+  font-size: 1rem;
+  color: #525151;
+}
+
+#sendBtn {
+  padding: 10px 20px;
+  border: none;
+  background-color: #007bff;
+  color: white;
+  font-weight: bold;
+  border-radius: 0 5px 5px 0;
+  cursor: pointer;
+}
+
+#sendBtn:hover {
+  background-color: #0056b3;
+}
+
+.invite-button {
+  margin: 10px;
+}
+
+#addFriendModal {
+  display: none;
+  background-color: #2a2a2a;
+  padding: 10px;
+  border: 1px solid #444;
+  border-radius: 5px;
+  position: absolute;
+  top: 425x;
+  left: 280px;
+  z-index: 1000;
+}
+
+#addFriendModal input {
+  padding: 5px;
+  width: 150px;
+  margin-right: 5px;
+  color: #2a2a2a;
+}
+
+#addFriendModal button {
+  padding: 5px 10px;
+  background-color: #28a745;
+  border: none;
+  color: white;
+  cursor: pointer;
+}
+
+#addFriendModal button:hover {
+  background-color: #218838;
+}

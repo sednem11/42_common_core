@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<link rel="stylesheet" href="login.css">
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Login com Google + 2FA</title>
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
+</head>
+<body>
+  <h1>Login com Google</h1>
+
+  <div id="g_id_onload"
+       data-client_id="671647101102-84fau4aa0m5tvomd3viihckln5a8icqp.apps.googleusercontent.com"
+       data-callback="handleCredentialResponse"
+       data-auto_prompt="false">
+  </div>
+
+  <div class="g_id_signin"
+       data-type="standard"
+       data-shape="rectangular"
+       data-theme="outline"
+       data-text="signin_with"
+       data-size="large"
+       data-logo_alignment="left">
+  </div>
+
+  <div id="status" style="margin-top: 20px;"></div>
+
+  <!-- QR code para configurar 2FA -->
+  <div id="qrcode-section" style="display:none; margin-top: 20px;">
+    <h2>Configura o 2FA</h2>
+    <p>Escaneia este QR code na tua app de autenticação (Google Authenticator, Authy, etc):</p>
+    <div id="qrcode"></div>
+    <button id="btn-show-2fa" style="margin-top: 10px;">Já escaneei, quero inserir o código</button>
+  </div>
+
+  <!-- Input para código 2FA -->
+  <div id="twofa-section" style="display:none; margin-top: 20px;">
+    <h2>Autenticação de Dois Fatores (2FA)</h2>
+    <p>Introduz o código do teu app de autenticação:</p>
+    <input type="text" id="twofa-code" placeholder="Código 2FA" />
+    <button id="verify-2fa-btn">Verificar Código</button>
+    <div id="twofa-result" style="color: red; margin-top: 10px;"></div>
+  </div>
+
+  <script>
+    let token = sessionStorage.getItem('authToken') || ''
+
+    if (token) {
+      document.getElementById('status').innerText = 'Já estás logado com token salvo.'
+    }
+
+    async function handleCredentialResponse(response) {
+      const id_token = response.credential
+      const res = await fetch('http://localhost:3000/auth/google', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id_token })
+      })
+      const data = await res.json()
+
+      if (data.error) {
+        document.getElementById('status').innerText = 'Erro: ' + data.error
+        return
+      }
+
+      token = data.token
+      data.requires2FA = true
+      sessionStorage.setItem('authToken', token)
+      // window.location.href = 'index.html';               <<<<<<<<-------------------------------------------------------- 
+
+      document.getElementById('status').innerText = 'Login feito!'
+
+      if (data.requires2FA) {
+        document.getElementById('status').innerText += ' Precisas de autenticação de dois fatores.'
+        await setup2FA()
+        document.getElementById('twofa-section').style.display = 'none'
+      } else {
+        document.getElementById('status').innerText += ' Não precisas de 2FA. Estás logado.'
+      }
+    }
+
+    async function setup2FA() {
+      const res = await fetch('http://localhost:3000/auth/2fa/setup', {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      })
+      const data = await res.json()
+      console.log('Resposta do /2fa/setup:', data)
+      if (data.qrCodeDataURL) {
+        document.getElementById('qrcode').innerHTML = `<img src="${data.qrCodeDataURL}" />`
+        document.getElementById('qrcode-section').style.display = 'block'
+      }
+    }
+
+    document.getElementById('btn-show-2fa').addEventListener('click', () => {
+      document.getElementById('qrcode-section').style.display = 'none'
+      document.getElementById('twofa-section').style.display = 'block'
+    })
+
+    document.getElementById('verify-2fa-btn').addEventListener('click', async () => {
+      const code = document.getElementById('twofa-code').value.trim()
+      if (!code) {
+        document.getElementById('twofa-result').innerText = 'Por favor, insere o código 2FA.'
+        return
+      }
+
+      const res = await fetch('http://localhost:3000/auth/2fa/verify', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`
+        },
+        body: JSON.stringify({ token: code })
+      })
+
+      const data = await res.json()
+      if (data.verified) {
+        document.getElementById('twofa-result').style.color = 'green'
+        document.getElementById('twofa-result').innerText = '2FA verificado com sucesso! Estás completamente logado.'
+        document.getElementById('status').innerText = 'Login completo com 2FA!'
+        window.location.href = 'index.html';
+      } else {
+        document.getElementById('twofa-result').style.color = 'red'
+        document.getElementById('twofa-result').innerText = data.error || 'Código inválido.'
+      }
+    })
+  </script>
+</body>
+</html>

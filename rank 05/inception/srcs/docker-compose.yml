@@ -1,0 +1,62 @@
+services:
+  mariadb:
+    build: requirements/mariadb/.
+    image: mariadb
+    container_name: mariadb
+    volumes:
+      - mariadb_data:/var/lib/mysql
+    env_file: ../.env
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    networks:
+      - inception
+    restart: always
+
+  wordpress:
+    build: requirements/wordpress/.
+    image: wordpress
+    container_name: wp-php
+    volumes:
+      - wordpress_files:/var/www/html
+    depends_on:
+      mariadb:
+        condition: service_healthy
+    env_file: ../.env
+    networks:
+      - inception
+    restart: always
+
+  nginx:
+    build: requirements/nginx/.
+    container_name: nginx
+    image: nginx
+    ports:
+      - "443:443"
+    depends_on:
+      - wordpress
+    volumes:
+      - wordpress_files:/var/www/html
+    networks:
+      - inception
+    restart: always
+
+volumes:
+  mariadb_data:
+    name: mariadb
+    driver_opts:
+      type: none
+      o: bind
+      device: /home/macampos/data
+  wordpress_files:
+    name: wordPress
+    driver_opts:
+      type: none
+      o: bind
+      device: /home/macampos/data
+
+networks:
+  inception:
+    driver: bridge

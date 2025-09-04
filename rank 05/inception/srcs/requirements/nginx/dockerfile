@@ -1,0 +1,20 @@
+
+FROM debian:bullseye
+
+RUN apt-get update && apt-get install -y nginx && apt-get install -y openssl && rm -rf /var/lib/apt/lists/*
+
+RUN mkdir -p /etc/nginx/ssl
+
+RUN openssl req -newkey rsa:2048 \
+-nodes \
+-days 365 \
+-keyout /etc/nginx/ssl/nginx.key \
+-x509 \
+-out /etc/nginx/ssl/nginx.crt \
+-subj /C=PT/ST=Lisbon/L=Lisbon/O=42Lisboa/OU=macampos/CN=localhost
+
+RUN chmod +x /etc/nginx/ssl/nginx.key /etc/nginx/ssl/nginx.crt
+
+COPY tools/nginx.conf /etc/nginx/nginx.conf
+
+CMD ["nginx", "-g", "daemon off;"]

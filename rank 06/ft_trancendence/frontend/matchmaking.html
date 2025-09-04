@@ -1,0 +1,38 @@
+<script>
+    console.log("✅ Matchmaking HTML injected");
+</script>
+<div class="matchmaking-container p-4 space-y-4 hidden" id="matchmakingView">
+    <h2 class="text-2xl font-bold">Matchmaking</h2>
+  
+    <div id="matchStatus" class="text-gray-700">
+      Click the button below to enter matchmaking.
+    </div>
+  
+    <div id="friendMatch">
+      <input type="text" id="FriendMatchInput" placeholder="Friend ID..." class="border p-2 rounded" />
+      <button id="inviteFriend" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
+        invite Friend
+      </button>
+    </div>
+
+    <button id="startMatchmaking" class="hidden">
+      Start Matchmaking 1v1
+    </button>
+
+    <button id="startMatchmaking2v2" class="hidden">
+      Start Matchmaking 2v2
+    </button>
+  
+    <button id="cancelMatchmaking" class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 ">
+      Cancel Matchmaking
+    </button>
+  
+  </div>
+
+  <div id="matchResult" class="mt-4 text-green-600 font-semibold hidden">
+    <!-- Match result goes here -->
+  </div>
+  
+  <!-- Container where game.html will be injected -->
+<div id="gameContainer" class="hidden"></div>
+  

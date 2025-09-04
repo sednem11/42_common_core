@@ -1,0 +1,14 @@
+{
+    "compilerOptions": {
+      "module": "ESnext",
+      "moduleResolution": "node",
+      "target": "ES2020",
+      "outDir": "./dist",
+      "strict": true,
+      "esModuleInterop": true,
+      "sourceMap": true
+    },
+    "include": ["main.ts", "game.ts", "chat.ts", "matchmaking.ts", "profile.ts", "login.ts", "logout.ts"]
+}
+
+//ts para j.s pobackend usar

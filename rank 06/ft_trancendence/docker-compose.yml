@@ -1,0 +1,125 @@
+# version: "3"
+
+# services:
+#   frontend:
+#     build:
+#       context: .
+#       dockerfile: frontend/Dockerfile
+#     ports:
+#       - "8080:80"
+
+#   backend:
+#     build:
+#       context: .
+#       dockerfile: backend/Dockerfile
+#     depends_on:
+#       - frontend
+#     ports:
+#       - "3000:3000"
+#     volumes:
+#       - .:/app
+#       - /app/node_modules
+#       - sqlite-data:/app/backend/src/db    # <-- persist your data.db file
+#     working_dir: /app
+#     command: npx ts-node-dev backend/src/index.ts
+
+# volumes:
+#   sqlite-data:
+
+
+# version: "3"
+
+# services:
+#   app:
+#     build:
+#       context: .
+#       dockerfile: backend/Dockerfile
+#     ports:
+#       - "3000:3000"
+#     volumes:
+#       - .:/app
+#       - /app/node_modules
+#       - sqlite-data:/app/backend/src/db
+#     working_dir: /app
+#     command: npx ts-node-dev backend/src/index.ts
+
+# volumes:
+#   sqlite-data:
+
+
+# version: "3"
+
+# services:
+#   app:
+#     build:
+#       context: .
+#       dockerfile: backend/Dockerfile
+#     ports:
+#       - "3000:3000"
+#     volumes:
+#       - .:/app
+#       - /app/node_modules
+#       - sqlite-data:/app/backend/src/db
+#     working_dir: /app
+#     command: npx ts-node-dev backend/src/index.ts
+
+# volumes:
+#   sqlite-data:
+
+# version: "3"
+
+# services:
+#   backend:
+#     build:
+#       context: .
+#       dockerfile: backend/Dockerfile
+#     ports:
+#       - "3000:3000"
+#     volumes:
+#       - .:/app
+#       - /app/node_modules
+#       - sqlite-data:/app/backend/src/db
+#     working_dir: /app
+#     command: npx ts-node-dev backend/src/index.ts
+
+#   frontend:
+#     build:
+#       context: .
+#       dockerfile: frontend/Dockerfile
+#     ports:
+#       - "3000:3000"
+
+# volumes:
+#   sqlite-data:
+
+
+version: "3"
+
+services:
+  frontend:
+    build:
+      context: .
+      dockerfile: frontend/Dockerfile
+    working_dir: /ft_transcendence
+    command: npx tsc --project frontend/tsconfig.json
+    volumes:
+      - .:/ft_transcendence
+
+  backend:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    depends_on:
+      frontend:
+        condition: service_completed_successfully
+    working_dir: /ft_transcendence
+    command: npx ts-node-dev backend/src/index.ts
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/ft_transcendence
+      - /ft_transcendence/node_modules
+      - sqlite-data:/ft_transcendence/backend/src/db
+
+volumes:
+  sqlite-data:
